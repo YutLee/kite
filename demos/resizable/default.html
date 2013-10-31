@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link rel="shortcut icon" href="../../favicon.ico">
+<title>kite</title>
+<link href="../../css/kite.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../js/kite.core.js"></script>
+<script type="text/javascript" src="../../js/kite.draggable.js"></script>
+<script type="text/javascript" src="../../js/kite.resizable.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('.resizable').kiteResizable();
+	});
+</script>
+<style>
+	.resizable{width:400px;height:300px;background-color:#efefef;border:1px solid #e1e1e1;border-radius:5px;margin:100px;}
+	/*.k-resizable{position:relative;}*/
+	.k-resizable-n, .k-resizable-e, .k-resizable-s, .k-resizable-w, .k-resizable-se, .k-resizable-sw, .k-resizable-nw, .k-resizable-ne{position:absolute;background-color:#fff;opacity:0.0;filter:alpha(opacity=0);}
+	.k-resizable-n, .k-resizable-s{width:100%;height:6px;}
+	.k-resizable-e, .k-resizable-w{width:6px;height:100%;}
+	.k-resizable-sw, .k-resizable-ne, .k-resizable-nw{width:6px;height:6px;}
+	.k-resizable-se{width:16px;height:16px;}
+	.k-resizable-n{cursor:n-resize;top:-3px;left:0;}
+	.k-resizable-e{cursor:e-resize;top:0;right:-3px;}
+	.k-resizable-s{cursor:s-resize;bottom:-3px;left:0;}
+	.k-resizable-w{cursor:w-resize;top:0;left:-3px;}
+	.k-resizable-ne{cursor:ne-resize;top:-3px;right:-3px;}
+	.k-resizable-nw{cursor:nw-resize;top:-3px;left:-3px;}
+	.k-resizable-se{cursor:se-resize;bottom:-3px;right:-3px;}
+	.k-resizable-sw{cursor:sw-resize;bottom:-3px;left:-3px;}
+</style>
+</head>
+
+<body>
+	<div class="resizable">Hi, I'm div!Now you can drag or resize me.</div>
+</body>
+</html>

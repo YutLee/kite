@@ -1,0 +1,4 @@
+.panelbar{line-height:28px;}
+.panelbar dd{border-top:1px solid #e6e6e6;}
+.panelbar dd a{color:#666;text-decoration:none;padding:0 10px;display:block;}
+.panelbar dd dl{display:none;}

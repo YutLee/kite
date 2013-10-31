@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link rel="shortcut icon" href="../../favicon.ico">
+<title>kite</title>
+<link href="../../css/kite.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../js/kite.core.js"></script>
+<script type="text/javascript" src="../../js/kite.draggable.js"></script>
+<script type="text/javascript">
+	$(function(){
+		var startCounter = $('#event-start'),
+			dragCounter = $('#event-drag'),
+			stopCounter = $('#event-stop'),
+			count = [0, 0, 0];
+		$('.drag').kiteDraggable({
+			start: function() {
+				updateCounter(startCounter, ++count[0]);
+			},
+			drag: function() {
+				updateCounter(dragCounter, ++count[1]);
+			},
+			stop: function() {
+				updateCounter(stopCounter, ++count[2]);
+			}
+		});
+		
+		function updateCounter(eventCounter, newCount) {
+			if(!eventCounter.hasClass('invoking')) {
+				eventCounter.addClass('invoking').siblings('.invoking').removeClass('invoking');
+			}
+			$('span', eventCounter).text(newCount);
+		}
+	});
+</script>
+<style>
+	.drag-parent{position:absolute;}
+	.drag{background-color:#eee;width:180px;height:180px;border:1px solid #ccc;padding:10px;}
+	.drag dd{border:1px solid #ccc;margin:5px;padding:4px;background-color:#ddd;}
+	.drag dd.invoking{background-color:#ccc;border:1px solid #aaa;}
+</style>
+</head>
+
+<body>
+	<div class="drag-parent">
+		<div class="drag">
+			<p>Drag me to trigger the chain of events.</p>
+			<dl>
+				<dd id="event-start">"start" invoked <span>0</span></dd>
+				<dd id="event-drag">"drag" invoked <span>0</span></dd>
+				<dd id="event-stop">"stop" invoked <span>0</span></dd>
+			</dl>
+		</div>
+	</div>
+</body>
+</html>

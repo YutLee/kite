@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link rel="shortcut icon" href="../images/favicon.ico">
+<title>kite</title>
+<link href="demos.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../js/kite.core.js"></script>
+<script type="text/javascript" src="../js/kite.draggable.js"></script>
+<script type="text/javascript" src="../js/kite.resizable.js"></script>
+<script type="text/javascript" src="../js/kite.tabs.js"></script>
+<script type="text/javascript" src="../js/kite.button.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//set leftbar
+		var setLeftlBar = function() {
+			$('.left-nav').height(Math.max($(window).height()-$('.header').outerHeight(), $('#kite-demos').outerHeight(true)));	
+		}
+		setLeftlBar();
+		$(window).resize(function() {
+			setLeftlBar();
+			$('#demo-frame').width($(window).width()-420);
+		});
+		
+		$('.demos-nav a').click(function(e) {
+			window.location.hash = this.href.replace(/.+\/([^\/]+)\/index\.html/,'$1') + '|default';
+			loadPage(this.href);
+			$('.demos-nav a.selected').removeClass('selected');
+			$(this).addClass('selected');
+			return false;
+		});
+		
+		if (window.location.hash) {  
+			if (window.location.hash.indexOf('|') === -1) {
+				window.location.hash += '|default';	
+			}
+			var path = window.location.href.replace(/(index\.html)?#/,'');
+			path = path.replace('\|','/') + '.html';
+			loadPage(path);
+		}
+		
+		function loadPage(path) {
+			var section = path.replace(/\/[^\/]+\.html/,''),
+				title = section.replace(/.+\/([^\/]+)/,'$1').replace(/_/, ' ');
+			$('#kite-demos').empty()
+				.append('<h1 class="demo-title">' + title + '</h1>')
+				.append('<div id="demo-config" class="fix"></div>')
+				.find('#demo-config')
+					.append('<div id="demo-frame" class="demo-frame"></div><div id="demo-config-menu" class="demo-config-menu"></div>')
+					.find('#demo-config-menu')
+						.load(section + '/index.html .demo-nav', function() {
+							
+							$('#demo-config-menu a').each(function() {
+								this.setAttribute('href', section + '/' + this.getAttribute('href').replace(/.+\/([^\/]+)/,'$1'));
+								$(this).attr('target', 'demo-frame');
+								$(this).click(function() {
+
+									//resetDemos();
+									
+									$(this).parents('ul').find('li').removeClass('demo-config-on');
+									$(this).parent().addClass('demo-config-on');
+									$('#demo-notes').fadeOut();
+
+									//Set the hash to the actual page without ".html"
+									window.location.hash = title + '|' + this.getAttribute('href').match((/\/([^\/\\]+)\.html/))[1];
+
+									loadDemo(this.getAttribute('href'));
+
+									return false;
+								});
+							});
+							
+							if (window.location.hash) {
+								var demo = window.location.hash.split('|')[1];
+								$('#demo-config-menu a').each(function(){
+									if (this.href.indexOf(demo + '.html') !== -1) {
+										$(this).parents('ul').find('li').removeClass('demo-config-on');
+										$(this).parent().addClass('demo-config-on');	
+										loadDemo(this.href);														
+									}
+								});
+							}
+						})
+					.end()
+					.find('#demo-frame')
+						.width($(window).width()-420)
+					.end()
+				.end()
+				.append('<div id="demo-link" class="demo-link"><a class="demoWindowLink" href="#">Open demo in a new window</a></div>')
+				.find('#demo-link a')
+					.bind('click', function(event) {
+						window.open(this.href);
+						return false;
+					})
+			.end();
+		}
+		
+		function loadDemo(path) {
+			$.get(path, function(data) {
+				var directory = path.match(/([^\/]+)\/[^\/\.]+\.html$/)[1];
+				data = data.replace(/<script.*>.*<\/script>/ig,''); // Remove script tags
+				data = data.replace(/<\/?link.*>/ig,''); //Remove link tags
+				data = data.replace(/<\/?html.*>/ig,''); //Remove html tag
+				data = data.replace(/<\/?body.*>/ig,''); //Remove body tag
+				data = data.replace(/<\/?head.*>/ig,''); //Remove head tag
+				data = data.replace(/<\/?!doctype.*>/ig,''); //Remove doctype
+				data = data.replace(/<title.*>.*<\/title>/ig,''); // Remove title tags
+				data = data.replace(/<\/?meta.*>/ig,'');
+				data = data.replace(/((href|src)=["'])(?!(http|#))/ig, '$1' + directory + '/');
+				$('#demo-frame').empty().html(data);
+				$('#demo-link a').attr('href', path);
+			}, 'html');
+		}
+		
+	});
+</script>
+</head>
+<body>
+	<div class="header fix">
+		<div class="logo fl-l">kite</div>
+		<div class="description cell">&nbsp;</div>
+	</div>
+	<div class="fix">
+		<div class="left-nav fl-l">
+			<dl class="demos-nav">
+				<dd>
+					<a href="draggable/index.html">draggable</a>
+				</dd>
+				<dd>
+					<a href="dropable/index.html">dropable</a>
+				</dd>
+				<dd>
+					<a href="resizable/index.html">resizable</a>
+				</dd>
+				<dd>
+					<a href="window/index.html">window</a>
+				</dd>
+				<dd>
+					<a href="tabs/index.html">tabs</a>
+				</dd>
+				<dd>
+					<a href="button/index.html">button</a>
+				</dd>
+			</dl>
+		</div>
+		<div id="kite-demos" class="content cell">
+			<h1>kite</h1>
+			<p>kite is a web UI basic jQuery.</p>
+		</div>
+	</div>
+</body>
+</html>

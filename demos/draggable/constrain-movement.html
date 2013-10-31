@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link rel="shortcut icon" href="../../favicon.ico">
+<title>kite</title>
+<link href="../demos.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../js/kite.core.js"></script>
+<script type="text/javascript" src="../../js/kite.draggable.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#draggable1').kiteDraggable({axis:'x'});
+		$('#draggable2').kiteDraggable({axis:'y'});
+		$('#draggable3').kiteDraggable({containment:'parent'});
+		$('#draggable4').kiteDraggable({containment:'#demo-frame'});
+		
+	});
+</script>
+<style>
+	.demo p{padding:6px 0;}
+	.drag-parent{}
+	.drag{background-color:#eee;width:100px;height:100px;border:1px solid #ccc;padding:10px;float:left;}
+	.drag-x{cursor:e-resize;}
+	.drag-y{cursor:n-resize;margin-left:10px;}
+	.containment-wrapper{border:1px solid #ccc;height:250px;padding:20px;}
+	#draggable4{position:fixed;}
+</style>
+</head>
+
+<body>
+	<div class="demo">
+		<div class="drag-parent fix">
+			<p>Constrain movement along an axis:</p>
+			<div id="draggable1" class="drag drag-x">I can be drag only horizontally</div>
+			<div id="draggable2" class="drag drag-y">I can be drag only vertically</div>
+		</div>
+		<p>Constrain movement to within anohter DOM emelent</p>
+		<div id="containment-wrapper" class="containment-wrapper fix">
+			<div id="draggable3" class="drag">I'm contained within my parent</div>
+			<div id="draggable4" class="drag">I'm contained within #demo-frame</div>
+		</div>
+	</div>
+</body>
+</html>

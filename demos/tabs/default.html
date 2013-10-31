@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link rel="shortcut icon" href="../../favicon.ico">
+<title>kite</title>
+<link href="../../css/kite.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="../../js/kite.core.js"></script>
+<script type="text/javascript" src="../../js/kite.tabs.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#tabs').kiteTabs();
+	});
+</script>
+<style>
+	.tabs{background-color:#efefef;border:1px solid #e1e1e1;padding:10px;margin:20px;}
+	.tabs ul{}
+	.k-tabs-item{float:left;padding:4px 6px;background-color:#e1e1e0;border:1px solid #d4d4d4;border-bottom:none;margin:0 -1px 0 0;cursor:pointer;}
+	.k-tabs-item-hover{background-color:#eee;}
+	.k-tabs-item-select{background-color:#fff;margin-bottom:-1px;padding-bottom:5px;}
+	.k-tabs-content{background-color:#fff;border:1px solid #d4d4d4;padding:10px;display:none;}
+</style>
+</head>
+
+<body>
+	<div id="tabs" class="tabs">
+		<ul class="fix">
+			<li>kite item1</li>
+			<li>kite item2</li>
+			<li>kite item3</li>
+		</ul>
+		<div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer felis libero, lobortis ac rutrum quis, varius a velit. Donec lacus erat, cursus sed porta quis, adipiscing et ligula. Duis volutpat, sem pharetra accumsan pharetra, mi ligula cursus felis, ac aliquet leo diam eget risus. Integer facilisis, justo cursus venenatis vehicula, massa nisl tempor sem, in ullamcorper neque mauris in orci.</div>
+		<div>Ut orci ligula, varius ac consequat in, rhoncus in dolor. Mauris pulvinar molestie accumsan. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean velit ligula, pharetra quis aliquam sed, scelerisque sed sapien. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aliquam dui mi, vulputate vitae pulvinar ac, condimentum sed eros.</div>
+		<div>Aliquam at nisl quis est adipiscing bibendum. Nam malesuada eros facilisis arcu vulputate at aliquam nunc tempor. In commodo scelerisque enim, eget sodales lorem condimentum rutrum. Phasellus sem metus, ultricies at commodo in, tristique non est. Morbi vel mauris eget mauris commodo elementum. Nam eget libero lacus, ut sollicitudin ante. Nam odio quam, suscipit a fringilla eget, dignissim nec arcu. Donec tristique arcu ut sapien elementum pellentesque.</div>
+	</div>
+</body>
+</html>
